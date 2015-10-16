@@ -1,0 +1,49 @@
+html, body, .container {
+  height: 100%;
+  margin-left: -5px;
+  width: 100%;
+}
+
+#map-canvas {
+	position: absolute;
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    display: block;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+header {
+	position: absolute;
+	opacity: 80%;
+	background: rgba(54,22,22,0.85);
+	margin: 0px;
+	box-shadow: 0px 0px 30px 10px #2F1200;
+}
+
+/*Upon hover, indicate list item choice to user by changing background color*/
+ul :hover {
+    background-color: #F0FFF0;
+}
+
+
+#header-title {
+	margin: 5px 0px 0px 10px;
+	color: rgba(236,220,207,0.7);
+}
+
+#search-form {
+  color: black;
+  padding: 8px;
+  text-align: left;
+  width: 100%;
+}
+
+#search-input {
+  width: 400px;
+}
+
