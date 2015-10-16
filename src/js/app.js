@@ -11,6 +11,21 @@ var Model = function() {
 var ViewModel = function() {
 	var self = this;
 
+	self.notifyUser = ko.observable('User notification');
+	console.log(self.notifyUser());
+
+	self.currentLocation = ko.observable('Palo Alto, CA');
+
+	self.processInput = function() {
+		var locationInput = self.currentLocation();
+		self.notifyUser('Processing your input...');
+	};
+
+	self.coffeeLocList = ko.observableArray([]);
+
+	self.coffeeLocMarkersList = ko.observableArray([]);
+
+
  	//initialize variables
  	var map, 
  		mapCanvas, 

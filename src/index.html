@@ -17,12 +17,13 @@
 		<div id="mobile-container">
 		<header>
 			<h2 id="header-title">Coffee Break</h2>
-			<form id="search-form">
-				<input id="search-input" type="text" placeholder="Search list of coffee shops..." autofocus/>
+			<form id="search-form" data-bind="submit: processInput">
+				<input id="search-input" data-bind="value: currentLocation" type="text" placeholder="Search for nearby coffee shops..." autofocus/>
 				<button id="search-btn" type="submit">
 					<span class="glyphicon glyphicon-search"></span>
 				</button>
 			</form>
+			<h5 id="notification-text" class="notification" data-bind="text: notifyUser"></h5>
 		</header>
 		</div>
 		<p>test paragraph</p>
