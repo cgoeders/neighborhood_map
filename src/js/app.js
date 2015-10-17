@@ -5,9 +5,11 @@ var map,
 	center,
 	latLng,
 	infoWindow,
-	marker;
+	marker,
+	infoWindow;
 
 
+//array of nearby coffee locations
 var cafeList = [
 	{
 		name: 'ZombieRunner',
@@ -92,6 +94,8 @@ var cafeList = [
 
 
 
+/*_______________________ViewModel_______________________*/
+
 
 var ViewModel = function() {
 	var self = this;
@@ -154,9 +158,14 @@ var ViewModel = function() {
 		// self.notifyUser('Processing your input...');
 	};
 
-	console.log(self.filterList());
+	self.openInfoWindow = function(listItem) {
+		//set new map center based on listItem's marker position
+		center = listItem.getPosition();
+		map.setZoom(14);
+		map.panTo(center);
 
-	self.openInfoWindow = function() {
+		//open selected listItem marker's infoWindow
+		infoWindow.open(map, listItem);
 
 	}
 
@@ -178,21 +187,44 @@ var ViewModel = function() {
  		};
  		map = new google.maps.Map(mapCanvas, mapOptions);
 
- 		//add map markers for venues in `cafeList`
- 		infoWindow = new google.maps.InfoWindow();
 
+ 		//add map markers for venues in `cafeList`
  		self.cafeList().forEach(function(place) {
  			// console.log(place);
  			markerOptions = {
  				position: new google.maps.LatLng(place.lat, place.lng),
  				map: map,
  				title: place.name,
- 				markerIndex: place.markerIndex
+ 				markerIndex: place.markerIndex,
+ 				animation: google.maps.Animation.DROP
  			};
  			marker = new google.maps.Marker(markerOptions);
  			self.markerList().push(marker);
  			self.filterList(self.markerList());
 
+ 			//add info window
+ 			infoWindow = new google.maps.InfoWindow({
+ 				content: 'testing123'
+ 			});
+
+ 			//add marker click handler
+ 			google.maps.event.addListener(marker, 'click', (function(marker) {
+ 				return function() {
+ 					//make map center on selected marker
+ 					center = marker.getPosition();
+ 					map.setZoom(14);
+ 					map.panTo(center);
+
+ 					//animate marker with bounce, and set timeout for bounce
+ 					marker.setAnimation(google.maps.Animation.BOUNCE);
+ 					setTimeout(function() {
+ 						marker.setAnimation(null);
+ 					}, 2150);
+
+ 					infoWindow.setContent(marker.title + '<div id="info-content"></div>');
+ 					infoWindow.open(map, marker);
+ 				}
+ 			})(marker));
  		});
 
  		// console.log(self.markerList());

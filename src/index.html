@@ -26,7 +26,7 @@
 			<h5 id="notification-text" class="notification" data-bind="text: notifyUser"></h5>
 		</header>
 		<ul id="list-view" data-bind="foreach: filterList()">
-			<li id="list-item" data-bind="text: title"></li>
+			<li id="list-item" data-bind="text: title, click: $parent.openInfoWindow"></li>
 		</ul>
 		</div>
 	</div>
