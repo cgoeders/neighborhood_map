@@ -69,21 +69,21 @@ var cafeList = [
 		name: 'Philz Coffee (Downtown)',
 		lat: 37.4421512,
 		lng: -122.163721,
-		markerIndex: 7,
+		markerIndex: 8,
 		show: true
 	},
 	{
 		name: 'Starbucks (Midtown)',
 		lat: 37.4332611,
 		lng: -122.1309018,
-		markerIndex: 8,
+		markerIndex: 9,
 		show: true
 	},
 	{
 		name: 'Coupa Cafe (Stanford)',
 		lat: 37.4262082,
 		lng: -122.169189,
-		markerIndex: 9,
+		markerIndex: 10,
 		show: true
 	},
 ];
@@ -96,25 +96,65 @@ var cafeList = [
 var ViewModel = function() {
 	var self = this;
 
-	self.notifyUser = ko.observable('User notification');
-
 	self.currentLocation = ko.observable('Palo Alto, CA');
 	
 	self.inputQuery = ko.observable('');
 
-	//filter list and markers based on user's input query
-	self.runFilter = function() {
-		var query = self.inputQuery;
-		console.log(query());
-
-
-		
-		self.notifyUser('Processing your input...');
-	};
-
 	self.cafeList = ko.observableArray(cafeList);
 
 	self.markerList = ko.observableArray([]);
+	self.filterList = ko.observableArray([]);
+
+	self.notifyUser = ko.observable('Welcome!');
+
+	(function() {
+		if (self.filterList.length > 0) {
+			return 'Showing results matching your search...';
+		}
+		return '';
+	});
+
+	//filter list and markers based on user's input query
+	self.runFilter = function() {
+		var query = self.inputQuery();
+		console.log(query);
+		
+		//make all existing markers initially invisible as user types query
+
+		self.filterList().forEach(function(markerItem) {
+			markerItem.setVisible(false);
+		});
+
+		//update `filterList` with filtered markers using query
+		self.filterList(ko.utils.arrayFilter(self.markerList(), function(item) {
+			if (item.title.toLowerCase().indexOf(query) >= 0) {
+				item.setVisible(true);
+				return true;
+			}
+			return false;
+		}));
+
+		if (!(self.filterList().length > 0)) {
+			self.notifyUser('No results. Try another search term.');
+		} else {
+			self.notifyUser('Showing ' + self.filterList().length.toString() + ' result(s).');
+		};
+
+
+		//iterate through filterList()
+
+
+		console.log(self.filterList(), 'filterList');
+		console.log(self.markerList(), 'markerList');
+		// console.log(self.filterList());
+		//two parts of filtering process:
+		// self.filterMarkers();
+		// self.filterList();
+
+		// self.notifyUser('Processing your input...');
+	};
+
+	console.log(self.filterList());
 
 
  	//initialize Google Map
@@ -144,9 +184,12 @@ var ViewModel = function() {
  			};
  			marker = new google.maps.Marker(markerOptions);
  			self.markerList().push(marker);
+ 			self.filterList(self.markerList());
+
  		});
 
- 		console.log(self.markerList());
+ 		// console.log(self.markerList());
+ 		console.log(self.filterList());
 
  	}
 
