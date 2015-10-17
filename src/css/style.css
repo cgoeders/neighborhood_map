@@ -48,8 +48,9 @@ header {
 
 #search-form {
 	color: black;
-	padding: 7px 10px 5px 10px;
+	padding: 7px 5px 5px 10px;
 	text-align: left;
+	width: 100%;
 }
 
 #search-input {
