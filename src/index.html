@@ -14,7 +14,7 @@
 		<div id="map-canvas">
 			<p>(Google Map goes here!)</p>
 		</div>
-		<div id="mobile-container">
+		<div id="side-container">
 		<header>
 			<h2 id="header-title">Coffee Break</h2>
 			<form id="search-form" data-bind="submit: runFilter">
@@ -25,9 +25,10 @@
 			</form>
 			<h5 id="notification-text" class="notification" data-bind="text: notifyUser"></h5>
 		</header>
+		<ul id="list-view" data-bind="foreach: filterList()">
+			<li id="list-item" data-bind="text: title"></li>
+		</ul>
 		</div>
-		<p>test paragraph</p>
-
 	</div>
 
 	

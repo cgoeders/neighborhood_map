@@ -137,7 +137,7 @@ var ViewModel = function() {
 		if (!(self.filterList().length > 0)) {
 			self.notifyUser('No results. Try another search term.');
 		} else {
-			self.notifyUser('Showing ' + self.filterList().length.toString() + ' result(s).');
+			self.notifyUser('Showing ' + self.filterList().length.toString() + ' result(s)');
 		};
 
 
@@ -155,6 +155,13 @@ var ViewModel = function() {
 	};
 
 	console.log(self.filterList());
+
+	self.openInfoWindow = function() {
+
+	}
+
+
+
 
 
  	//initialize Google Map
