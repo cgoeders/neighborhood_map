@@ -38,7 +38,7 @@ var cafeList = [
 		show: true
 	},
 	{
-		name: 'Peet\'s Coffee & Teas',
+		name: 'Peet\'s Coffee & Tea',
 		lat: 37.4380821,
 		lng: -122.1615256,
 		markerIndex: 4,
@@ -116,7 +116,7 @@ var ViewModel = function() {
 
 	//filter list and markers based on user's input query
 	self.runFilter = function() {
-		var query = self.inputQuery();
+		var query = self.inputQuery().toLowerCase();
 		console.log(query);
 		
 		//make all existing markers initially invisible as user types query
