@@ -111,6 +111,7 @@ var ViewModel = function() {
 
 	self.notifyUser = ko.observable('Welcome!');
 
+	//TO FIX!!!!!!!!!!
 	(function() {
 		if (self.filterList.length > 0) {
 			return 'Showing results matching your search...';
@@ -144,6 +145,19 @@ var ViewModel = function() {
 			self.notifyUser('Showing ' + self.filterList().length.toString() + ' result(s)');
 		};
 
+		/*
+		TODO: if only one item in `filterList`, zoom to marker and openInfoWindow
+		*/
+
+		//
+		if (self.filterList().length === 1) {
+			var onlyItem = self.filterList()[0];
+			self.openInfoWindow(onlyItem);
+		} else {
+			infoWindow.close();
+		}
+
+
 
 		//iterate through filterList()
 
@@ -165,7 +179,9 @@ var ViewModel = function() {
 		map.panTo(center);
 
 		//open selected listItem marker's infoWindow
+		infoWindow.setContent(listItem.title + '<div id="info-content"></div>');
 		infoWindow.open(map, listItem);
+
 
 	}
 

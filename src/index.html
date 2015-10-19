@@ -18,7 +18,7 @@
 		<header>
 			<h2 id="header-title">Coffee Break</h2>
 			<form id="search-form" data-bind="submit: runFilter">
-				<input id="search-input" data-bind="value: inputQuery, valueUpdate: 'keyup'" type="text" placeholder="Search coffee shops..." autofocus/>
+				<input id="search-input" data-bind="value: inputQuery, valueUpdate: 'afterkeydown'" autocomplete="off" type="text" placeholder="Search coffee shops..." autofocus/>
 				<button id="search-btn" type="submit">
 					<span class="glyphicon glyphicon-search"></span>
 				</button>
@@ -33,7 +33,7 @@
 
 	
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script async src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="../bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="../bower_components/knockout/dist/knockout.js"></script>
