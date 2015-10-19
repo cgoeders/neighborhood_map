@@ -119,12 +119,19 @@ var ViewModel = function() {
 		return '';
 	});
 
+	self.showLiveInput = ko.computed(function() {
+  		console.log(self.inputQuery());
+	});
+
+
 	//filter list and markers based on user's input query
 	self.runFilter = function() {
 		var query = self.inputQuery().toLowerCase();
 		console.log(query);
 		
-		//make all existing markers initially invisible as user types query
+		//TODO: make all existing markers initially invisible as user types query
+
+
 
 		self.filterList().forEach(function(markerItem) {
 			markerItem.setVisible(false);
@@ -154,22 +161,12 @@ var ViewModel = function() {
 			var onlyItem = self.filterList()[0];
 			self.openInfoWindow(onlyItem);
 		} else {
+			map.setZoom(13);
 			infoWindow.close();
 		}
 
-
-
-		//iterate through filterList()
-
-
 		console.log(self.filterList(), 'filterList');
 		console.log(self.markerList(), 'markerList');
-		// console.log(self.filterList());
-		//two parts of filtering process:
-		// self.filterMarkers();
-		// self.filterList();
-
-		// self.notifyUser('Processing your input...');
 	};
 
 	self.openInfoWindow = function(listItem) {
@@ -181,12 +178,7 @@ var ViewModel = function() {
 		//open selected listItem marker's infoWindow
 		infoWindow.setContent(listItem.title + '<div id="info-content"></div>');
 		infoWindow.open(map, listItem);
-
-
 	}
-
-
-
 
 
  	//initialize Google Map
@@ -247,6 +239,10 @@ var ViewModel = function() {
  		console.log(self.filterList());
 
  	}
+
+ 	//TODO: on window resize event, reset map center
+ 	
+
 
 	// //TODO: create user error message in case GMaps doesn't load
 	// if (typeof google !== 'object' || typeof google.maps !== 'object') {
