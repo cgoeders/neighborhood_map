@@ -57,6 +57,12 @@ header {
 	width: 80%;
 	font-style: italic;
 	background-color: rgba(250,246,243,1);
+	border-radius: 5px;
+}
+
+#search-btn {
+	background-color: rgba(250,246,243,1);
+	border-radius: 5px;
 }
 
 ul {

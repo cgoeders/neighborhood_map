@@ -48,8 +48,8 @@ var cafeList = [
 	},
 	{
 		name: 'Coupa Cafe (Downtown)',
-		lat: 37.4446842,
-		lng: -122.1637248,
+		lat: 37.44468,
+		lng: -122.1637195,
 		markerIndex: 5,
 		show: true
 	},
@@ -119,19 +119,21 @@ var ViewModel = function() {
 		return '';
 	});
 
-	self.showLiveInput = ko.computed(function() {
-  		console.log(self.inputQuery());
-	});
+	// self.showLiveInput = ko.computed(function() {
+ //  		console.log(self.inputQuery());
+ //  		self.runFilter;
+	// });
+
 
 
 	//filter list and markers based on user's input query
 	self.runFilter = function() {
 		var query = self.inputQuery().toLowerCase();
 		console.log(query);
-		
-		//TODO: make all existing markers initially invisible as user types query
+		// self.inputQuery(self.inputQuery().toLowerCase());
+		// console.log(self.inputQuery());
 
-
+		//TODO (for live search): make all existing markers invisible as user types
 
 		self.filterList().forEach(function(markerItem) {
 			markerItem.setVisible(false);
@@ -152,15 +154,13 @@ var ViewModel = function() {
 			self.notifyUser('Showing ' + self.filterList().length.toString() + ' result(s)');
 		};
 
-		/*
-		TODO: if only one item in `filterList`, zoom to marker and openInfoWindow
-		*/
-
-		//
+		//if only one item in `filterList`, zoom to marker and openInfoWindow
 		if (self.filterList().length === 1) {
 			var onlyItem = self.filterList()[0];
 			self.openInfoWindow(onlyItem);
 		} else {
+			//revert to original map settings
+			center = new google.maps.LatLng(37.437313, -122.160059);
 			map.setZoom(13);
 			infoWindow.close();
 		}
@@ -169,11 +169,18 @@ var ViewModel = function() {
 		console.log(self.markerList(), 'markerList');
 	};
 
+
 	self.openInfoWindow = function(listItem) {
 		//set new map center based on listItem's marker position
 		center = listItem.getPosition();
 		map.setZoom(14);
 		map.panTo(center);
+
+		//animate marker with bounce; set timeout for bounce
+		listItem.setAnimation(google.maps.Animation.BOUNCE);
+		setTimeout(function() {
+			listItem.setAnimation(null);
+		}, 2150);
 
 		//open selected listItem marker's infoWindow
 		infoWindow.setContent(listItem.title + '<div id="info-content"></div>');
@@ -182,9 +189,10 @@ var ViewModel = function() {
 
 
  	//initialize Google Map
- 	function initialize() {
+ 	var initialize = function() {
  		//center map initially in Palo Alto, CA, USA
  		latLng = new google.maps.LatLng(37.437313, -122.160059);
+ 		center = latLng;
  		mapCanvas = document.getElementById('map-canvas');
  		mapOptions = {
  			zoom: 13,
@@ -195,10 +203,10 @@ var ViewModel = function() {
  		};
  		map = new google.maps.Map(mapCanvas, mapOptions);
 
-
  		//add map markers for venues in `cafeList`
  		self.cafeList().forEach(function(place) {
  			// console.log(place);
+
  			markerOptions = {
  				position: new google.maps.LatLng(place.lat, place.lng),
  				map: map,
@@ -206,6 +214,7 @@ var ViewModel = function() {
  				markerIndex: place.markerIndex,
  				animation: google.maps.Animation.DROP
  			};
+
  			marker = new google.maps.Marker(markerOptions);
  			self.markerList().push(marker);
  			self.filterList(self.markerList());
@@ -233,15 +242,30 @@ var ViewModel = function() {
  					infoWindow.open(map, marker);
  				}
  			})(marker));
+
+ 			//upon window resize, adjust the map center
+			google.maps.event.addDomListener(window, 'resize', function() {
+				map.panTo(center);
+			});
+
  		});
 
  		// console.log(self.markerList());
  		console.log(self.filterList());
 
+ 		console.log(center);
+
+	
+
  	}
 
+
+
+
+
  	//TODO: on window resize event, reset map center
- 	
+
+
 
 
 	// //TODO: create user error message in case GMaps doesn't load
@@ -249,6 +273,8 @@ var ViewModel = function() {
 	// 	self.notifyUser("Google Maps could not be loaded");
 	// }
 	google.maps.event.addDomListener(window, 'load', initialize);
+
+
 };
 
 ko.applyBindings(new ViewModel());
