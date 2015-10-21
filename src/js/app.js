@@ -148,7 +148,7 @@ var ViewModel = function() {
 			return false;
 		}));
 
-		if (!(self.filterList().length > 0)) {
+		if (self.filterList().length === 0) {
 			self.notifyUser('No results. Try another search term.');
 		} else {
 			self.notifyUser('Showing ' + self.filterList().length.toString() + ' result(s)');
@@ -170,35 +170,6 @@ var ViewModel = function() {
 	};
 
 
-	self.openInfoWindow = function(listItem) {
-		//set new map center based on listItem's marker position
-		center = listItem.getPosition();
-		map.setZoom(14);
-		map.panTo(center);
-
-		//animate marker with bounce; set timeout for bounce
-		listItem.setAnimation(google.maps.Animation.BOUNCE);
-		setTimeout(function() {
-			listItem.setAnimation(null);
-		}, 2150);
-
-		//open selected listItem marker's infoWindow
-		infoWindow.setContent('<div id="info-content"></div>');
-
-		//get cafeList entry object whose name matches this marker's title
-		// var placeItem;
-		// for (var i = 0; i < cafeList.length; i++) {
-		// 	if (cafeList[i].name === listItem.title) {
-		// 		placeItem = cafeList[i];
-		// 	}
-		// }
-
-		var placeItem = self.getPlaceFromMarker(listItem);
-
-		callFoursquare(placeItem);
-		infoWindow.open(map, listItem);
-	}
-
 	self.getPlaceFromMarker = function(markerItem) {
 		var placeItem;
 		for (var i = 0; i < cafeList.length; i++) {
@@ -208,9 +179,6 @@ var ViewModel = function() {
 		}
 		return placeItem;
 	}
-
-
-
 
 
 
@@ -269,10 +237,7 @@ var ViewModel = function() {
  						marker.setAnimation(null);
  					}, 2150);
 
- 					infoWindow.setContent('I don\'t work. :(' + '<div id="info-content"></div>');
- 					var placeItem = self.getPlaceFromMarker(marker);
- 					callFoursquare(placeItem);
- 					infoWindow.open(map, marker);
+ 					self.openInfoWindow(marker);
  				}
  			})(marker));
  		});
@@ -287,21 +252,16 @@ var ViewModel = function() {
  		// console.log(center);
  	}
 
-	google.maps.event.addDomListener(window, 'load', initialize);
 
-
-
-
-
-
- 	var callFoursquare = function(placeObj) {
+	self.openInfoWindow = function(listItem) {
+        
+        var placeObj = self.getPlaceFromMarker(listItem);
  		var markLat = placeObj.lat;
  		var markLng = placeObj.lng;
  		var clientID = 'W51WSBBLLACBVC4P22Q0QFOCJX3YLHQMNELDDNCC1OWUQKBF';
  		var clientSecret = 'M3ZHLNWWGDY0YJXIB1FWXCRLYMLJ132GEVQMA3INMFQ04OWM';
- 		var $infoWindowContent = $('#info-content');
 
- 		//TODO: add method to extract non-parenthesized name
+ 		//extract non-parenthesized name
  		var queryName;
  		var index = placeObj.name.indexOf('(');
  		if (index === -1) {
@@ -310,43 +270,44 @@ var ViewModel = function() {
  			queryName = placeObj.name.substring(0, index-1);
  		}
 
-
- 		var url = 'https://api.foursquare.com/v2/venues/search?' + 
+ 		var url = 'https://api.four4444square.com/v2/venues/search?' + 
  				  'll=' + markLat + ',' + markLng + 
  				  '&v=20151019' + 
  				  '&client_id=' + clientID + 
  				  '&client_secret=' + clientSecret + 
  				  '&query=' + queryName;
 
- 		//FULL URL: https://api.foursquare.com/v2/venues/search?ll=37.4259801,-122.1469309&v=20151019&client_id=W51WSBBLLACBVC4P22Q0QFOCJX3YLHQMNELDDNCC1OWUQKBF&client_secret=M3ZHLNWWGDY0YJXIB1FWXCRLYMLJ132GEVQMA3INMFQ04OWM&query=ZombieRunner
-
- 		var venueName = '';
-
 		$.ajax({
 			url: url,
-			dataType: 'jsonp',
+			dataType: 'json',
 			success: function(data) {
-				// this.FSvenueItems = data.response.venues;
-				// console.log(placeObj.name, this.FSvenueItems[0].name);
-				var venue = data.response.venues[0];
-				venueName = venue.name;
-				var venuePhone = venue.contact.formattedPhone;
-				var venueURL = venue.url;
+				venue = data.response.venues[0];
+				venueName = venue.name; 
+				venuePhone = venue.contact.formattedPhone;
+				venueURL = venue.url;
 
-				$infoWindowContent.append('<p>' + venueName + '</p>');
-				$infoWindowContent.append('<p>Phone: ' + venuePhone + '</p>');
-				$infoWindowContent.append('<p>Website: ' + venueURL + '</p>');
+                                center = listItem.getPosition();
+                                map.setZoom(14);
+                                map.panTo(center);
+
+                                //animate marker with bounce; set timeout for bounce
+                                listItem.setAnimation(google.maps.Animation.BOUNCE);
+                                setTimeout(function() {
+                                  listItem.setAnimation(null);
+                                }, 2150);
+                                
+                                infoWindow.open(map, listItem);
+                                infoWindow.setContent('<div id="info-content"></div>');
+
+				$('#info-content').append('<p>' + venueName + '</p>');
+				$('#info-content').append('<p>Phone: ' + venuePhone + '</p>');
+				$('#info-content').append('<p>Website: ' + venueURL + '</p>');
 			},
 			error: function() {
-				//DOES THIS WORK???????????????????????????
 				console.log("OH NO -- ERROR");
 				alert("Error! Foursquare data request failed.");
 			}
 		});
-
-		console.log(venueName);
-		// placeObj.FSvenueName = venueName;
- 		// console.log(venueName);
 
  	};
 
@@ -354,6 +315,8 @@ var ViewModel = function() {
 	// if (typeof google !== 'object' || typeof google.maps !== 'object') {
 	// 	self.notifyUser("Google Maps could not be loaded");
 	// }
+
+	google.maps.event.addDomListener(window, 'load', initialize);
 
 };
 
