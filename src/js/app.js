@@ -270,7 +270,7 @@ var ViewModel = function() {
  			queryName = placeObj.name.substring(0, index-1);
  		}
 
- 		var url = 'https://api.four4444square.com/v2/venues/search?' + 
+ 		var url = 'https://api.foursquare.com/v2/venues/search?' + 
  				  'll=' + markLat + ',' + markLng + 
  				  '&v=20151019' + 
  				  '&client_id=' + clientID + 
@@ -301,7 +301,7 @@ var ViewModel = function() {
 
 				$('#info-content').append('<p>' + venueName + '</p>');
 				$('#info-content').append('<p>Phone: ' + venuePhone + '</p>');
-				$('#info-content').append('<p>Website: ' + venueURL + '</p>');
+				$('#info-content').append('<p>Website: <a href="' + venueURL + '">' + venueURL + '</p>');
 			},
 			error: function() {
 				console.log("OH NO -- ERROR");
