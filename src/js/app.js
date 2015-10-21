@@ -183,13 +183,37 @@ var ViewModel = function() {
 		}, 2150);
 
 		//open selected listItem marker's infoWindow
-		infoWindow.setContent(listItem.title + '<div id="info-content"></div>');
+		infoWindow.setContent('<div id="info-content"></div>');
+
+		//get cafeList entry object whose name matches this marker's title
+		// var placeItem;
+		// for (var i = 0; i < cafeList.length; i++) {
+		// 	if (cafeList[i].name === listItem.title) {
+		// 		placeItem = cafeList[i];
+		// 	}
+		// }
+
+		var placeItem = self.getPlaceFromMarker(listItem);
+
+		callFoursquare(placeItem);
 		infoWindow.open(map, listItem);
 	}
+
+	self.getPlaceFromMarker= function(markerItem) {
+		var placeItem;
+		for (var i = 0; i < cafeList.length; i++) {
+			if (cafeList[i].name === markerItem.title) {
+				placeItem = cafeList[i];
+			}
+		}
+		return placeItem;
+	}
+
 
 
  	//initialize Google Map
  	var initialize = function() {
+
  		//center map initially in Palo Alto, CA, USA
  		latLng = new google.maps.LatLng(37.437313, -122.160059);
  		center = latLng;
@@ -205,12 +229,17 @@ var ViewModel = function() {
 
  		//add map markers for venues in `cafeList`
  		self.cafeList().forEach(function(place) {
+
  			// console.log(place);
+ 			// console.log(callFoursquare(place));
+ 			// console.log(place.FSvenueName);
 
  			markerOptions = {
  				position: new google.maps.LatLng(place.lat, place.lng),
  				map: map,
  				title: place.name,
+ 				givenLat: place.lat,
+ 				givenLng: place.lng,
  				markerIndex: place.markerIndex,
  				animation: google.maps.Animation.DROP
  			};
@@ -238,32 +267,87 @@ var ViewModel = function() {
  						marker.setAnimation(null);
  					}, 2150);
 
- 					infoWindow.setContent(marker.title + '<div id="info-content"></div>');
+ 					infoWindow.setContent('<div id="info-content"></div>');
+ 					var placeItem = self.getPlaceFromMarker(marker);
+ 					callFoursquare(placeItem);
  					infoWindow.open(map, marker);
  				}
  			})(marker));
 
- 			//upon window resize, adjust the map center
-			google.maps.event.addDomListener(window, 'resize', function() {
-				map.panTo(center);
-			});
+
+ 		//TODO: FIX??? --  create user error message in case GMaps doesn't load
+		// if (typeof google !== 'object' || typeof google.maps !== 'object') {
+		// 	self.notifyUser("Google Maps could not be loaded");
+		// }
 
  		});
 
+		//upon window resize, adjust the map center
+		google.maps.event.addDomListener(window, 'resize', function() {
+			map.panTo(center);
+		});
+
  		// console.log(self.markerList());
- 		console.log(self.filterList());
-
- 		console.log(center);
-
-	
-
+ 		// console.log(self.filterList());
+ 		// console.log(center);
  	}
 
+ 	var callFoursquare = function(placeObj) {
+ 		var markLat = placeObj.lat;
+ 		var markLng = placeObj.lng;
+ 		var clientID = 'W51WSBBLLACBVC4P22Q0QFOCJX3YLHQMNELDDNCC1OWUQKBF';
+ 		var clientSecret = 'M3ZHLNWWGDY0YJXIB1FWXCRLYMLJ132GEVQMA3INMFQ04OWM';
+ 		var $infoWindowContent = $('#info-content');
+
+ 		//TODO: add method to extract non-parenthesized name
+ 		var queryName;
+ 		var index = placeObj.name.indexOf('(');
+ 		if (index === -1) {
+ 			queryName = placeObj.name;
+ 		} else {
+ 			queryName = placeObj.name.substring(0, index-1);
+ 		}
+ 		// console.log(placeObj.name);
 
 
+ 		var url = 'https://api.foursquare.com/v2/venues/search?' + 
+ 				  'll=' + markLat + ',' + markLng + 
+ 				  '&v=20151019' + 
+ 				  '&client_id=' + clientID + 
+ 				  '&client_secret=' + clientSecret + 
+ 				  '&query=' + queryName;
 
+ 		//FULL URL: https://api.foursquare.com/v2/venues/search?ll=37.4259801,-122.1469309&v=20151019&client_id=W51WSBBLLACBVC4P22Q0QFOCJX3YLHQMNELDDNCC1OWUQKBF&client_secret=M3ZHLNWWGDY0YJXIB1FWXCRLYMLJ132GEVQMA3INMFQ04OWM&query=ZombieRunner
 
- 	//TODO: on window resize event, reset map center
+ 		// var venueName = '123';
+
+		$.ajax({
+			url: url,
+			dataType: 'jsonp',
+			success: function(data) {
+				// this.FSvenueItems = data.response.venues;
+				// console.log(placeObj.name, this.FSvenueItems[0].name);
+				var venue = data.response.venues[0];
+				var venueName = venue.name; 
+				var venuePhone = venue.contact.formattedPhone;
+				var venueURL = venue.url;
+
+				$infoWindowContent.append('<p>' + venueName + '</p>');
+				$infoWindowContent.append('<p>Phone: ' + venuePhone + '</p>');
+				$infoWindowContent.append('<p>Website: ' + venueURL + '</p>');
+			},
+			error: function() {
+				//DOES THIS WORK???????????????????????????
+				console.log("OH NO -- ERROR");
+				alert("Error! Foursquare data request failed.");
+			}
+		});
+
+		// placeObj.FSvenueName = venueName;
+ 		// console.log(venueName);
+
+ 	};
+
 
 
 
