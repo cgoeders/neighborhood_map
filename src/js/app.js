@@ -199,7 +199,7 @@ var ViewModel = function() {
 		infoWindow.open(map, listItem);
 	}
 
-	self.getPlaceFromMarker= function(markerItem) {
+	self.getPlaceFromMarker = function(markerItem) {
 		var placeItem;
 		for (var i = 0; i < cafeList.length; i++) {
 			if (cafeList[i].name === markerItem.title) {
@@ -211,9 +211,11 @@ var ViewModel = function() {
 
 
 
+
+
+
  	//initialize Google Map
  	var initialize = function() {
-
  		//center map initially in Palo Alto, CA, USA
  		latLng = new google.maps.LatLng(37.437313, -122.160059);
  		center = latLng;
@@ -273,13 +275,6 @@ var ViewModel = function() {
  					infoWindow.open(map, marker);
  				}
  			})(marker));
-
-
- 		//TODO: FIX????? --  create user error message in case GMaps doesn't load
-		// if (typeof google !== 'object' || typeof google.maps !== 'object') {
-		// 	self.notifyUser("Google Maps could not be loaded");
-		// }
-
  		});
 
 		//upon window resize, adjust the map center
@@ -291,6 +286,13 @@ var ViewModel = function() {
  		// console.log(self.filterList());
  		// console.log(center);
  	}
+
+	google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
+
+
 
  	var callFoursquare = function(placeObj) {
  		var markLat = placeObj.lat;
@@ -318,7 +320,7 @@ var ViewModel = function() {
 
  		//FULL URL: https://api.foursquare.com/v2/venues/search?ll=37.4259801,-122.1469309&v=20151019&client_id=W51WSBBLLACBVC4P22Q0QFOCJX3YLHQMNELDDNCC1OWUQKBF&client_secret=M3ZHLNWWGDY0YJXIB1FWXCRLYMLJ132GEVQMA3INMFQ04OWM&query=ZombieRunner
 
- 		// var venueName = '123';
+ 		var venueName = '';
 
 		$.ajax({
 			url: url,
@@ -327,7 +329,7 @@ var ViewModel = function() {
 				// this.FSvenueItems = data.response.venues;
 				// console.log(placeObj.name, this.FSvenueItems[0].name);
 				var venue = data.response.venues[0];
-				var venueName = venue.name; 
+				venueName = venue.name;
 				var venuePhone = venue.contact.formattedPhone;
 				var venueURL = venue.url;
 
@@ -342,21 +344,16 @@ var ViewModel = function() {
 			}
 		});
 
+		console.log(venueName);
 		// placeObj.FSvenueName = venueName;
  		// console.log(venueName);
 
  	};
 
-
-
-
-
 	// //TODO: create user error message in case GMaps doesn't load
 	// if (typeof google !== 'object' || typeof google.maps !== 'object') {
 	// 	self.notifyUser("Google Maps could not be loaded");
 	// }
-	google.maps.event.addDomListener(window, 'load', initialize);
-
 
 };
 
