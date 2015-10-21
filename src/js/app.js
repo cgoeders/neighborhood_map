@@ -267,7 +267,7 @@ var ViewModel = function() {
  						marker.setAnimation(null);
  					}, 2150);
 
- 					infoWindow.setContent('<div id="info-content"></div>');
+ 					infoWindow.setContent('I don\'t work. :(' + '<div id="info-content"></div>');
  					var placeItem = self.getPlaceFromMarker(marker);
  					callFoursquare(placeItem);
  					infoWindow.open(map, marker);
@@ -275,7 +275,7 @@ var ViewModel = function() {
  			})(marker));
 
 
- 		//TODO: FIX??? --  create user error message in case GMaps doesn't load
+ 		//TODO: FIX????? --  create user error message in case GMaps doesn't load
 		// if (typeof google !== 'object' || typeof google.maps !== 'object') {
 		// 	self.notifyUser("Google Maps could not be loaded");
 		// }
@@ -307,7 +307,6 @@ var ViewModel = function() {
  		} else {
  			queryName = placeObj.name.substring(0, index-1);
  		}
- 		// console.log(placeObj.name);
 
 
  		var url = 'https://api.foursquare.com/v2/venues/search?' + 
