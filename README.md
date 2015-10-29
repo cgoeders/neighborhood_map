@@ -32,7 +32,7 @@ Note: A list of resources used for this project (resources.txt) is included on t
 
 
 ###General optimizations
-- minified HTML, CSS, and JS; compressed images
+- minified HTML, CSS, and JS
 
 
 
