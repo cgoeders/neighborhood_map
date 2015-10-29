@@ -114,7 +114,7 @@ ul :hover {
 
 li {
 	text-align: center;
-	text-shadow: 1px 1px 4px tan;
+	text-shadow: 1px 1px 15px tan;
 	color: rgba(54,22,22,0.85);
 	padding: 5px;
 	padding-right: 20px;
