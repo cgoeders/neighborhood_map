@@ -1,0 +1,21 @@
+Resources used for Udacity FEND, Project 5 (Neighborhood Map)
+
+
+Udacity Resources: 
+--Course: Intro to AJAX
+--Course: JavaScript Design Patterns
+--Course: Responsive Web Design Fundamentals
+--Watched and/or read notes from Office Hours (via GitHub and Google Hangouts)
+--Discussion forums
+
+Other Resources:
+--Knockout JS documentation (http://knockoutjs.com/documentation/event-binding.html)
+--Google searches for more specific KO help (Ex. http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html)
+--Stack overflow
+--MDN
+--W3Schools
+--Google Web Fundamentals (http://developers.google.com/web/fundamentals/)
+--Google Maps API documentation (http://developers.google.com/maps/documentation/javascript/tutorial)
+--http://css-tricks.com
+--http://JSFiddle.net
+--Bootstrap documentation (http://getbootstrap.com/css/)
