@@ -141,7 +141,9 @@ li {
 	#search-input {
 		width: 450px;
 	}
-	#
+	#map-canvas {
+		margin-top: 240px;
+	}
 }
 
 @media screen and (min-width: 700px) {
@@ -150,13 +152,21 @@ li {
 		margin-left: auto;
 		margin-right: auto;
 	}*/
+	#container {
+		width: 100%;
+	}
 	#map-canvas {
-		margin-top: 125px;
-		margin-left: 150px;
+/*		margin-top: 125px;
+		margin-left: 150px;*/
+		width: 80%;
+		margin-top: 130px;
+		margin-left: 20%;
 		position: absolute;
 	}
 	#list-view {
-		width: 225px;
+/*		width: 225px;*/
+		overflow-y: hidden;
+		min-width: 20%;
 		height: 100%;
 		background-color: #5E1313;
 		position: absolute;
