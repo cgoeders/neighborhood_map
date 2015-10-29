@@ -80,14 +80,7 @@ var cafeList = [
 		lng: -122.1309018,
 		markerIndex: 9,
 		show: true
-	},
-	{
-		name: 'Coupa Cafe (Stanford)',
-		lat: 37.4262082,
-		lng: -122.169189,
-		markerIndex: 10,
-		show: true
-	},
+	}
 ];
 
 
@@ -282,6 +275,7 @@ var ViewModel = function() {
 			dataType: 'json',
 			success: function(data) {
 				venue = data.response.venues[0];
+				console.log(venue);
 				venueName = venue.name; 
 				venuePhone = venue.contact.formattedPhone;
 				venueURL = venue.url;
@@ -299,13 +293,14 @@ var ViewModel = function() {
                                 infoWindow.open(map, listItem);
                                 infoWindow.setContent('<div id="info-content"></div>');
 
-				$('#info-content').append('<p>' + venueName + '</p>');
-				$('#info-content').append('<p>Phone: ' + venuePhone + '</p>');
-				$('#info-content').append('<p>Website: <a href="' + venueURL + '">' + venueURL + '</p>');
+				$('#info-content').append('<p><strong>' + venueName + '</strong></p>');
+				$('#info-content').append('<p><strong>Phone: </strong>' + venuePhone + '</p>');
+				$('#info-content').append('<p><strong>Website: </strong><a href="' + venueURL + '">' + venueURL + '</p>');
 			},
 			error: function() {
 				console.log("OH NO -- ERROR");
 				alert("Error! Foursquare data request failed.");
+				self.notifyUser('Foursquare data could not be loaded.');
 			}
 		});
 
