@@ -61,7 +61,7 @@ header {
 	color: rgba(236,220,207,0.7);
 	font-style: italic;
 	text-align: center;
-	font-size: 1em;
+	font-size: 100%;
 	margin: 3px 5px 5px 10px;
 }
 
@@ -164,5 +164,8 @@ li {
 	}
 	ul {
 		padding: 10px 10px 0px 10px;
+	}
+	#notification-text {
+		font-size: 125%;
 	}
 }
