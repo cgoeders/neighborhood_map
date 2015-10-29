@@ -89,14 +89,18 @@ header {
 #list-view {
 	height: 115px;
 	overflow-y: scroll;
-	background-color: rgba(54,22,22,0.85);;
+/*	background-color: rgba(54,22,22,0.85);*/
+	background-color: #F2DABB;
+	border-bottom: 3px solid #2F1200;
+	box-shadow: 0 5px 30px #2F1200;
+/*	box-shadow-bottom: 0px 0px 0px 0px #2F1200;*/
 }
 
 ul {
 /*	position: absolute;*/
 /*	margin-top: 95px;*/
 	list-style-type: none;
-	padding: 10px 40px 0px 40px;
+	padding: 4px 40px 0px 40px;
 	background-color: rgb(100,88,23,1);
 }
 
@@ -124,13 +128,20 @@ li {
 
 
 
-@media screen and (min-width: 400px)  {
+@media screen and (min-width: 600px)  {
 /*	#container {
 		width: 100%;
 	}
 	header {
 		width: 100%;
 	}*/
+	#header-title {
+		font-size: 300%;
+	}
+	#search-input {
+		width: 450px;
+	}
+	#
 }
 
 @media screen and (min-width: 700px) {
@@ -139,4 +150,19 @@ li {
 		margin-left: auto;
 		margin-right: auto;
 	}*/
+	#map-canvas {
+		margin-top: 125px;
+		margin-left: 150px;
+		position: absolute;
+	}
+	#list-view {
+		width: 225px;
+		height: 100%;
+		background-color: #5E1313;
+		position: absolute;
+		margin: 0px;
+	}
+	ul {
+		padding: 10px 10px 0px 10px;
+	}
 }
