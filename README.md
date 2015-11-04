@@ -16,23 +16,23 @@ Note: A list of resources used for this project (resources.txt) is included on t
 ##Project Features
 
 
-###Search bar functionality
+####Search bar functionality
 - both the list view and map-marker views are filtered based on user search input
 
 
-###List view
+####List view
 - displays clickable cafe locations
 
-###Google Maps API implementation
+####Google Maps API implementation
 - app includes interactive Google Map with markers displaying infoWindows upon click
 
-###AJAX and use of third-party API
+####AJAX requests with third-party API
 - app utilizes Foursquare's API to glean and display venue-specific information
 
-###Responsive design
+####Responsive design
 - page design and layout adjust to fit screen dimensions
 
-###General optimizations
+####General optimizations
 - minified HTML, CSS, and JS
 
 
