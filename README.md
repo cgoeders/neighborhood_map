@@ -17,7 +17,7 @@ Note: A list of resources used for this project (resources.txt) is included on t
 
 
 ###Search bar functionality
-- both the list-view and map-marker views are filtered based on user search input
+- both the list view and map-marker views are filtered based on user search input
 
 
 ###List view
