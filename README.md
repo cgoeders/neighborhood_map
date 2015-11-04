@@ -26,7 +26,7 @@ Note: A list of resources used for this project (resources.txt) is included on t
 ####Google Maps API implementation
 - app includes interactive Google Map with markers displaying infoWindows upon click
 
-####AJAX and use of third-party API
+####AJAX requests with third-party API
 - app utilizes Foursquare's API to glean and display venue-specific information
 
 ####Responsive design
