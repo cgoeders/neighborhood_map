@@ -1,3 +1,11 @@
+/*
+
+CSS below outlines a mobile-first design priority and then sets media queries
+to adjust the layout for larger screens. 
+
+*/
+
+
 html, body {
 	width: 100%;
 }
@@ -12,19 +20,7 @@ header, #side-container {
 	height: 100%;
 }
 
-
-
 #map-canvas {
-/*	position: absolute;*/
-/*    height: 100%;
-    width: 100%;
-    margin: 0px;
-    padding: 0px;
-    display: block;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;*/
     margin-top: 225px;
 	background-color: black;
     width: 100%;
@@ -34,18 +30,12 @@ header, #side-container {
 }
 
 header {
-/*	position: absolute;*/
 	opacity: 100%;
 	background-color: rgba(54,22,22,0.85);
-/*	margin-left: 0px;*/
-/*	border-radius: 5px;
-	box-shadow: 0px 0px 22px 7px #2F1200;
-	padding-bottom: 3px;*/
 	order: 0;
 }
 
 #header-title {
-/*	margin: 5px 0px 0px 10px;*/
 	color: rgba(236,220,207,0.8);
 	font-style: bold;
 	font-size: 200%;
@@ -73,7 +63,6 @@ header {
 }
 
 #search-input {
-/*	width: 80%;*/
 	padding: 5px 10px 5px 10px;
 	font-style: italic;
 	font-size: 1em;
@@ -89,16 +78,12 @@ header {
 #list-view {
 	height: 115px;
 	overflow-y: scroll;
-/*	background-color: rgba(54,22,22,0.85);*/
 	background-color: #F2DABB;
 	border-bottom: 3px solid #2F1200;
 	box-shadow: 0 5px 30px #2F1200;
-/*	box-shadow-bottom: 0px 0px 0px 0px #2F1200;*/
 }
 
 ul {
-/*	position: absolute;*/
-/*	margin-top: 95px;*/
 	list-style-type: none;
 	padding: 4px 40px 0px 40px;
 	background-color: rgb(100,88,23,1);
@@ -127,14 +112,8 @@ li {
 }
 
 
-
-@media screen and (min-width: 600px)  {
-/*	#container {
-		width: 100%;
-	}
-	header {
-		width: 100%;
-	}*/
+/*Slight font and layout changes with near-tablet-sized screen*/
+@media screen and (min-width: 550px)  {
 	#header-title {
 		font-size: 300%;
 	}
@@ -146,25 +125,19 @@ li {
 	}
 }
 
+
+/*More significant layout changes for laptop browser-sized screen*/
 @media screen and (min-width: 700px) {
-/*	#container {
-		width: 700px;
-		margin-left: auto;
-		margin-right: auto;
-	}*/
 	#container {
 		width: 100%;
 	}
 	#map-canvas {
-/*		margin-top: 125px;
-		margin-left: 150px;*/
 		width: 80%;
 		margin-top: 130px;
 		margin-left: 20%;
 		position: absolute;
 	}
 	#list-view {
-/*		width: 225px;*/
 		overflow-y: hidden;
 		min-width: 20%;
 		height: 100%;
