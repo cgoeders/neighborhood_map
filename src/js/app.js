@@ -133,7 +133,7 @@ var ViewModel = function() {
 			self.notifyUser('Showing ' + self.filterList().length.toString() + ' result');
 		} else {
 			self.notifyUser('Showing ' + self.filterList().length.toString() + ' results');
-		};
+		}
 
 		//if only one item in `filterList`, zoom to that marker and open an info window
 		if (self.filterList().length === 1) {
@@ -156,12 +156,15 @@ var ViewModel = function() {
 			}
 		}
 		return placeItem;
-	}
+	};
 
  	//initialize Google Map
  	var initialize = function() {
  		//center map initially in Palo Alto, CA, USA
  		latLng = new google.maps.LatLng(37.437313, -122.160059);
+ 		
+ 		//TODO: fitBounds() function to control viewport
+
  		center = latLng;
  		mapCanvas = document.getElementById('map-canvas');
  		mapOptions = {
@@ -193,6 +196,11 @@ var ViewModel = function() {
 
  			//add info window
  			infoWindow = new google.maps.InfoWindow({
+ 				
+ 				//TODO: build info window content directly in JS using info 
+ 				//pulled from API via AJAX call
+
+
  				content: ''
  			});
 
@@ -211,7 +219,7 @@ var ViewModel = function() {
  					}, 2150);
 
  					self.openInfoWindow(marker);
- 				}
+ 				};
  			})(marker));
  		});
 
@@ -219,7 +227,7 @@ var ViewModel = function() {
 		google.maps.event.addDomListener(window, 'resize', function() {
 			map.panTo(center);
 		});
- 	}
+ 	};
 
  	//populates info window with requested Foursquare data
 	self.openInfoWindow = function(listItem) {
