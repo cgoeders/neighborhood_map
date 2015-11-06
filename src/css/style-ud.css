@@ -8,6 +8,8 @@ Note: This code has been organized according to Udacity's Front-End Nanodegree S
 */
 
 
+
+/*General styles for page*/
 html, 
 body {
 	width: 100%;
@@ -18,6 +20,8 @@ body {
 	flex-wrap: wrap;
 }
 
+
+/*General styles for header and side-container components*/
 header,
 .side-container {
 	width: 100%;
@@ -69,15 +73,6 @@ header {
 	border-radius: 5px;
 }
 
-.map-canvas {
-    margin-top: 225px;
-	background-color: black;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: -1;
-}
-
 .list-view {
 	height: 115px;
 	overflow-y: scroll;
@@ -112,6 +107,17 @@ li {
 	border-radius: 7px;
 	background-color: #FAF6F3;
 	box-shadow: 0 0 5px 1px #361616;
+}
+
+
+/*Styles for Google Map*/
+.map-canvas {
+    margin-top: 225px;
+	background-color: black;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
 }
 
 
