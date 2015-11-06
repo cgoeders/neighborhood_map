@@ -24,15 +24,6 @@ header,
 	height: 100%;
 }
 
-.map-canvas {
-    margin-top: 225px;
-	background-color: black;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: -1;
-}
-
 header {
 	opacity: 1;
 	background-color: #361616;
@@ -76,6 +67,15 @@ header {
 .search-btn {
 	background-color: #FAF6F3;
 	border-radius: 5px;
+}
+
+.map-canvas {
+    margin-top: 225px;
+	background-color: black;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
 }
 
 .list-view {
