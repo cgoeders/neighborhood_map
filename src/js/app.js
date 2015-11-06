@@ -10,6 +10,7 @@ according to KnockoutJS's MVVM design pattern.
 */
 
 
+
 //initialize global variables
 var map, 
 	mapCanvas, 
@@ -166,7 +167,7 @@ var ViewModel = function() {
  		//TODO: fitBounds() function to control viewport
 
  		center = latLng;
- 		mapCanvas = document.getElementById('map-canvas');
+ 		mapCanvas = document.getElementsByClassName('map-canvas')[0];
  		mapOptions = {
  			zoom: 13,
  			center: latLng,
@@ -300,4 +301,10 @@ var ViewModel = function() {
 	google.maps.event.addDomListener(window, 'load', initialize);
 };
 
-ko.applyBindings(new ViewModel());
+
+function setup() {
+	ko.applyBindings(new ViewModel());
+}
+
+
+// ko.applyBindings(new ViewModel());

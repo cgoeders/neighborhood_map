@@ -1,0 +1,164 @@
+/*
+
+CSS below outlines a mobile-first design priority and then sets media queries
+to adjust the layout for larger screens. 
+
+Note: This code has been organized according to Udacity's Front-End Nanodegree Style Guide.
+
+*/
+
+
+html {
+	width: 100%;
+}
+
+body {
+	width: 100%;
+}
+
+.main-container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+header {
+	width: 100%;
+	height: 100%;
+}
+
+.side-container {
+	width: 100%;
+	height: 100%;
+}
+
+.map-canvas {
+    margin-top: 225px;
+	background-color: black;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+header {
+	opacity: 1;
+	background-color: #361616;
+	order: 0;
+}
+
+.header-title {
+	color: #ECDCCF;
+	font-size: 200%;
+	text-transform: uppercase;
+	letter-spacing: 5px;
+	text-shadow: 3px 3px 7px black;
+	text-align: center;
+	margin: 0;
+	padding: 10px 10px 3px 10px;
+}
+
+.notification-text {
+	color: #ECDCCF;
+	font-style: italic;
+	text-align: center;
+	font-size: 100%;
+	margin: 3px 5px 5px 10px;
+}
+
+.search-form {
+	color: black;
+	padding: 7px 5px 5px 10px;
+	text-align: center;
+	width: 100%;
+}
+
+.search-input {
+	padding: 5px 10px 5px 10px;
+	font-style: italic;
+	font-size: 1em;
+	background-color: #FAF6F3;
+	border-radius: 5px;
+}
+
+.search-btn {
+	background-color: #FAF6F3;
+	border-radius: 5px;
+}
+
+.list-view {
+	height: 115px;
+	overflow-y: scroll;
+	background-color: #F2DABB;
+	border-bottom: 3px solid #2F1200;
+	box-shadow: 0 5px 30px #2F1200;
+}
+
+ul {
+	list-style-type: none;
+	padding: 4px 40px 0 40px;
+	background-color: #645817;
+}
+
+/*Upon hover, indicate list item choice to user by changing background color*/
+ul :hover {
+    background-color: #502424;
+    color: #ECDCCF;
+    text-shadow: 1px 1px 2px black;
+    border-color: #FAF6F3;
+}
+
+li {
+	text-align: center;
+	text-shadow: 1px 1px 15px tan;
+	color: #361616;
+	padding: 5px;
+	padding-right: 20px;
+	margin: 2px;
+	padding-left: 10px;
+	border: 1px solid #361616;
+	border-radius: 7px;
+	background-color: #FAF6F3;
+	box-shadow: 0 0 5px 1px #361616;
+}
+
+
+/*Slight font and layout changes with near-tablet-sized screen*/
+@media screen and (min-width: 550px)  {
+	.header-title {
+		font-size: 300%;
+	}
+	.search-input {
+		width: 450px;
+	}
+	.map-canvas {
+		margin-top: 240px;
+	}
+}
+
+
+/*More significant layout changes for laptop browser-sized screen*/
+@media screen and (min-width: 700px) {
+	.main-container {
+		width: 100%;
+	}
+	.map-canvas {
+		width: 80%;
+		margin-top: 130px;
+		margin-left: 20%;
+		position: absolute;
+	}
+	.list-view {
+		overflow-y: hidden;
+		min-width: 20%;
+		height: 100%;
+		background-color: #5E1313;
+		position: absolute;
+		margin: 0;
+	}
+	ul {
+		padding: 10px 10px 0 10px;
+	}
+	.notification-text {
+		font-size: 125%;
+	}
+}
