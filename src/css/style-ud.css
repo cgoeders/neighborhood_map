@@ -35,7 +35,7 @@ header {
 }
 
 .header-title {
-	color: #ECDCCF;
+	color: #ecdccf;
 	font-size: 200%;
 	text-transform: uppercase;
 	letter-spacing: 5px;
@@ -46,7 +46,7 @@ header {
 }
 
 .notification-text {
-	color: #ECDCCF;
+	color: #ecdccf;
 	font-style: italic;
 	text-align: center;
 	font-size: 100%;
@@ -64,21 +64,21 @@ header {
 	padding: 5px 10px 5px 10px;
 	font-style: italic;
 	font-size: 1em;
-	background-color: #FAF6F3;
+	background-color: #faf6f3;
 	border-radius: 5px;
 }
 
 .search-btn {
-	background-color: #FAF6F3;
+	background-color: #faf6f3;
 	border-radius: 5px;
 }
 
 .list-view {
 	height: 115px;
 	overflow-y: scroll;
-	background-color: #F2DABB;
-	border-bottom: 3px solid #2F1200;
-	box-shadow: 0 5px 30px #2F1200;
+	background-color: #f2dabb;
+	border-bottom: 3px solid #2f1200;
+	box-shadow: 0 5px 30px #2f1200;
 }
 
 ul {
@@ -90,9 +90,9 @@ ul {
 /*Upon hover, indicate list item choice to user by changing background color*/
 ul :hover {
     background-color: #502424;
-    color: #ECDCCF;
+    color: #ecdccf;
     text-shadow: 1px 1px 2px black;
-    border-color: #FAF6F3;
+    border-color: #faf6f3;
 }
 
 li {
@@ -105,7 +105,7 @@ li {
 	padding-left: 10px;
 	border: 1px solid #361616;
 	border-radius: 7px;
-	background-color: #FAF6F3;
+	background-color: #faf6f3;
 	box-shadow: 0 0 5px 1px #361616;
 }
 
@@ -150,7 +150,7 @@ li {
 		overflow-y: hidden;
 		min-width: 20%;
 		height: 100%;
-		background-color: #5E1313;
+		background-color: #5e1313;
 		position: absolute;
 		margin: 0;
 	}

@@ -15,6 +15,7 @@ according to KnockoutJS's MVVM design pattern.
 var map, 
 	mapCanvas, 
 	mapOptions, 
+	bounds,
 	center,
 	latLng,
 	infoWindow,
@@ -164,7 +165,8 @@ var ViewModel = function() {
  		//center map initially in Palo Alto, CA, USA
  		latLng = new google.maps.LatLng(37.437313, -122.160059);
  		
- 		//TODO: fitBounds() function to control viewport
+	 	//extend map bounds for each place
+		bounds = new google.maps.LatLngBounds();
 
  		center = latLng;
  		mapCanvas = document.getElementsByClassName('map-canvas')[0];
@@ -179,8 +181,11 @@ var ViewModel = function() {
 
  		//add map markers for all venues in `cafeList`
  		self.cafeList().forEach(function(place) {
+ 			
+ 			placeLatLng = new google.maps.LatLng(place.lat, place.lng);
+
  			markerOptions = {
- 				position: new google.maps.LatLng(place.lat, place.lng),
+ 				position: placeLatLng,
  				map: map,
  				title: place.name,
  				givenLat: place.lat,
@@ -205,6 +210,13 @@ var ViewModel = function() {
  				content: ''
  			});
 
+ 			//extend map bounds for each marker that is created
+ 			bounds.extend(placeLatLng);
+
+
+ 			//TODO: zoom out a bit?
+
+
  			//add marker click handler
  			google.maps.event.addListener(marker, 'click', (function(marker) {
  				return function() {
@@ -223,6 +235,9 @@ var ViewModel = function() {
  				};
  			})(marker));
  		});
+
+		//set bounds for map
+		map.fitBounds(bounds);
 
 		//upon window resize, adjust the map center
 		google.maps.event.addDomListener(window, 'resize', function() {
