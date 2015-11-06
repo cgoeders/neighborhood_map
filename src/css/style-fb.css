@@ -1,0 +1,59 @@
+.map-canvas {
+	position: absolute;
+	width: 100%;
+	height: 60%;
+	z-index: -1;
+	top: 40%;
+}
+
+.grid-row {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	width: 100%;
+}
+*/
+
+.map-canvas {
+	position: absolute;
+	width: 100%;
+	height: 60%;
+	z-index: -1;
+	top: 40%;
+}
+
+/*.grid-item-header {
+	position: absolute;
+	width: 100%;
+	height: 20%;
+	top: 0%;
+}*/
+
+.grid-item-list {
+	position: static;
+	width: 100%;
+	height: 20%;
+	top: 20%;
+	overflow-y: scroll;
+}
+
+ul {
+	color: blue;
+	height: 100px;
+	position: static;
+}
+
+.list-view {
+    position: absolute;
+	height: 20%;
+    left: 0;
+    top: 20%;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+ul {
+	color: blue;
+	height: 20%;
+	overflow-y: scroll;
+}

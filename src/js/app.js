@@ -174,7 +174,7 @@ var ViewModel = function() {
  			zoom: 13,
  			center: latLng,
  			mapTypeControlOptions: {
- 				position: google.maps.ControlPosition.TOP_RIGHT
+ 				position: google.maps.ControlPosition.BOTTOM_LEFT
  			}
  		};
  		map = new google.maps.Map(mapCanvas, mapOptions);
@@ -212,7 +212,6 @@ var ViewModel = function() {
 
  			//extend map bounds for each marker that is created
  			bounds.extend(placeLatLng);
-
 
  			//TODO: zoom out a bit?
 
