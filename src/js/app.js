@@ -19,8 +19,7 @@ var map,
 	center,
 	latLng,
 	infoWindow,
-	marker,
-	infoWindow;
+	marker;
 
 
 //define array of nearby coffee locations
@@ -304,13 +303,16 @@ var ViewModel = function() {
                 
                 //open info window
                 infoWindow.open(map, listItem);
-                infoWindow.setContent('<div id="info-content"></div>');
 
-                //add information to info window
-				$('#info-content').append('<p><strong>' + venueName + '</strong></p>');
-				$('#info-content').append('<p><strong>Phone: </strong>' + venuePhone + '</p>');
-				$('#info-content').append('<p><strong>Website: </strong><a href="' + venueURL + '">' + venueURL + '</p>');
-			},
+            	//add information to info window
+            	infoWindow.setContent('<div id="info-content">' + 
+            		'<p><strong>' + venueName + '</strong></p>' + 
+            		'<p><strong>Phone: </strong>' + venuePhone + '</p>' + 
+            		'<p><strong>Website: </strong><a href="' + venueURL + '">' + venueURL + '</p>' + 
+            		'</div>'
+            	);
+
+            },
 			//notify user if error occurs with request
 			error: function() {
 				console.log("AN ERROR HAS OCCURRED");
