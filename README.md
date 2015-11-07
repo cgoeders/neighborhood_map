@@ -5,7 +5,7 @@
 ##Instructions
 
 My project is hosted via gh-pages at the following URL. Please open in Chrome. 
-http://cgoeders.github.io/neighborhood_map/src/index-min.html
+http://cgoeders.github.io/neighborhood_map/src/index-udac-min.html
 
 Commented code for this project can be found on the master branch under "src/" (please see: index.html, style-2.css, and app.js). HTML, CSS, and JS files have been stripped of comments and minified.
 
