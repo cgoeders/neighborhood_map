@@ -122,6 +122,13 @@ li {
     z-index: -1;
 }
 
+/*Make notification-text disappear when in landscape mode on small devices*/
+@media screen and (max-width: 550px) and (orientation: landscape) {
+	.notification-text {
+		display: none;
+	}
+}
+
 
 /*Slight font and layout changes with near-tablet-sized screen*/
 @media screen and (min-width: 550px)  {
@@ -141,7 +148,6 @@ li {
 /*		margin-top: 240px;*/
 /*		height: 70%;*/
 	}
-
 /*
 	header {
 		width: 100%;
