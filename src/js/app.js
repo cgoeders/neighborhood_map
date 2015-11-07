@@ -122,10 +122,6 @@ var ViewModel = function() {
 		self.filterList(ko.utils.arrayFilter(self.markerList(), function(item) {
 			if (item.title.toLowerCase().indexOf(query) >= 0) {
 				item.setVisible(true);
-				// console.log(item.position);
-				// bounds.extend(item.position);
-				// map.fitBounds(bounds);
-				// map.setZoom(9);
 				return true;
 			}
 			return false;
@@ -210,19 +206,11 @@ var ViewModel = function() {
 
  			//add info window
  			infoWindow = new google.maps.InfoWindow({
- 				
- 				//TODO: build info window content directly in JS using info 
- 				//pulled from API via AJAX call
-
-
  				content: ''
  			});
 
  			//extend map bounds for each marker that is created
  			bounds.extend(placeLatLng);
-
- 			//TODO: zoom out a bit?
-
 
  			//add marker click handler
  			google.maps.event.addListener(marker, 'click', (function(marker) {
@@ -330,6 +318,3 @@ var ViewModel = function() {
 function setup() {
 	ko.applyBindings(new ViewModel());
 }
-
-
-// ko.applyBindings(new ViewModel());
