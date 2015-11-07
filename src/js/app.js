@@ -123,10 +123,19 @@ var ViewModel = function() {
 		self.filterList(ko.utils.arrayFilter(self.markerList(), function(item) {
 			if (item.title.toLowerCase().indexOf(query) >= 0) {
 				item.setVisible(true);
+				// console.log(item.position);
+				// bounds.extend(item.position);
+				// map.fitBounds(bounds);
+				// map.setZoom(9);
 				return true;
 			}
 			return false;
 		}));
+
+		for (var i = 0; i < self.filterList().length; i++) {
+			bounds.extend(self.filterList()[i].position);
+			map.fitBounds(bounds);
+		}
 
 		//notify user of search results
 		if (self.filterList().length === 0) {

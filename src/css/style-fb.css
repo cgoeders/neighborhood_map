@@ -1,9 +1,26 @@
+html, 
+body {
+	width: 100%;
+}
+
+header {
+	opacity: 1;
+	background-color: #361616;
+	color: white;
+	order: 0;
+}
+
+
 .map-canvas {
 	position: absolute;
 	width: 100%;
 	height: 60%;
-	z-index: -1;
+	z-index: 3;
 	top: 40%;
+}
+
+.search-form {
+	z-index: 2;
 }
 
 /*.grid-item-list {
@@ -14,11 +31,11 @@
 	overflow-y: scroll;
 }*/
 
-ul {
+/*ul {
 	color: blue;
 	height: 100px;
 	position: static;
-}
+}*/
 
 .list-view {
     position: absolute;
@@ -30,10 +47,11 @@ ul {
     text-align: center;
     list-style-type: none;
     padding-left: 0;
+    z-index: 1;
 }
 
 ul {
-	color: blue;
+	color: white;
 	height: 20%;
 	overflow-y: scroll;
 }
@@ -48,6 +66,22 @@ header {
 }
 
 
+/*@media screen and (max-height: 400px) {
+	.notification-text {
+		display: none;
+	}
+	.map-canvas {
+		height: 65%;
+		top: 35%;
+	}
+	.list-view {
+		top: 25%;
+		height: 10%;
+	}
+
+}*/
+
+
 /*Make notification-text disappear when in landscape mode on small devices*/
 @media screen and (max-height: 550px) and (orientation: landscape) {
 	.notification-text {
@@ -55,10 +89,17 @@ header {
 	}
 	.list-view {
 		height: 10%;
+		top: 25%;
+	}
+	/* make header smaller! */
+	.header-title {
+		font-size: 150%;
+		margin-top: 5px;
+		margin-bottom: 5px;
 	}
 }
 
-@media screen and (min-width: 550px) {
+/*@media screen and (min-width: 550px) {
 	.list-view {
 		height: 15%;
 		top: 15%;
@@ -67,7 +108,7 @@ header {
 		height: 70%;
 		top: 30%;
 	}
-}
+}*/
 
 @media screen and (min-width: 700px) {
 	.list-view {
